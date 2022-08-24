@@ -68,7 +68,7 @@ async fn handler(
                 &Command::new("sh")
                     .args(&["-c", &tools[&tooltype][&toolname].replace("{{ target }}", &format!("$'{}{}'", &workdir, &file_name.replace("'", "\'")))])
                     .output().expect("").stdout
-            ).to_string();
+            ).to_string().replace(&format!("{}{}", &workdir, &file_name), &file_name);
 
             if tooltype == "formatter".to_string() {
                 let file = File::open(format!("{}{}", &workdir, &file_name));
