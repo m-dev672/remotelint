@@ -4,6 +4,8 @@ Docker image that includes API server to use linter and formatter with keeping t
 
 [Docker Hub Repository](https://hub.docker.com/repository/docker/mdev672/sibyl)
 
+This project may have unknown security risks. Please do not expose to Internet.
+
 ## How to use
 
 ```

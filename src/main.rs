@@ -66,7 +66,7 @@ async fn handler(
 
             let mut output = String::from_utf8_lossy(
                 &Command::new("sh")
-                    .args(&["-c", &tools[&tooltype][&toolname].replace("{{ target }}", &format!("{}{}", &workdir, &file_name))])
+                    .args(&["-c", &tools[&tooltype][&toolname].replace("{{ target }}", &format!("$'{}{}'", &workdir, &file_name.replace("'", "\'")))])
                     .output().expect("").stdout
             ).to_string();
 
