@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  remotelint:
+    container_name: remotelint
+    image: mdev672/remotelint:latest
+    tty: true
+    restart: on-failure
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/root/.remotelint
+    command: bash

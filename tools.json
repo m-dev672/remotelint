@@ -1,0 +1,28 @@
+{
+    "linter": {
+        "clang-tidy": "clang-tidy {{ target }}",
+        "credo": "mix credo --format flycheck --strict {{ target }}",
+        "staticcheck": "staticcheck {{ target }}",
+        "htmlhint": "htmlhint -f unix {{ target }}",
+        "stylelint": "stylelint -f unix {{ target }}",
+        "jsonlint": "jsonlint {{ target }} 2>&1",
+        "eslint": "eslint -f unix --no-eslintrc {{ target }}",
+        "remark": "remark {{ target }} --quiet --frail",
+        "phpcs": "phpcs --report=emacs {{ target }}",
+        "flake8": "flake8 {{ target }}",
+        "rubocop": "rubocop {{ target }}",
+        "clippy": "clippy-driver --edition 2021 -Cpanic=abort {{ target }} 2>&1 | sed -z 's/\\n -->/ -->/g' | grep 'error:.*-->' | sed 's/\\(.*\\) --> \\(.*\\)/\\2:\\1/g'"
+    },
+    "formatter": {
+        "clang-format": "clang-format {{ target }}",
+        "mix-format": "mix format {{ target }}",
+        "go-fmt": "go fmt {{ target }}",
+        "prettier": "prettier {{ target }}",
+        "eslint": "eslint --fix --no-eslintrc {{ target }}",
+        "remark": "remark {{ target }} --quiet --frail --output",
+        "phpcbf": "phpcbf {{ target }}",
+        "autopep8": "autopep8 --in-place --aggressive --aggressive {{ target }}",
+        "rubocop": "rubocop -x {{ target }}",
+        "clippy": "rustfmt {{ target }}"
+    }
+}
