@@ -11,9 +11,9 @@ RUN cargo build --release
 
 FROM debian:stable-slim
 
-RUN mkdir /root/.remotelint
-COPY ./workbench /root/.remotelint/workbench
-WORKDIR /root/.remotelint/workbench
+RUN mkdir /root/.sibyl
+COPY ./workbench /root/.sibyl/workbench
+WORKDIR /root/.sibyl/workbench
 
 # Clang
 ## Linter / Clang-Tidy
@@ -106,12 +106,12 @@ ENV PATH=$PATH:/root/.cargo/bin
 ## Linter / SQLFluff
 RUN pip install sqlfluff
 
-RUN mkdir /root/.remotelint/bin
+RUN mkdir /root/.sibyl/bin
 COPY --from=builder \
-    /home/rust/target/x86_64-unknown-linux-musl/release/remotelint \
-    /root/.remotelint/bin/remotelint
-RUN chmod +x /root/.remotelint/bin/remotelint
-COPY ./tools.json /root/.remotelint/tools.json
+    /home/rust/target/x86_64-unknown-linux-musl/release/sibyl \
+    /root/.sibyl/bin/sibyl
+RUN chmod +x /root/.sibyl/bin/sibyl
+COPY ./tools.json /root/.sibyl/tools.json
 
 COPY ./startup.sh /startup.sh
 RUN chmod +x /startup.sh

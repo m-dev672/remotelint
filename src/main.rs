@@ -29,8 +29,8 @@ type Tools = HashMap<String, HashMap<String, String>>;
 #[tokio::main]
 async fn main() {
     let config = RustlsConfig::from_pem_file(
-        format!("{}{}", std::env::var("HOME").unwrap(), "/.remotelint/certs/cert.pem"),
-        format!("{}{}", std::env::var("HOME").unwrap(), "/.remotelint/certs/key.pem")
+        format!("{}{}", std::env::var("HOME").unwrap(), "/.sibyl/certs/cert.pem"),
+        format!("{}{}", std::env::var("HOME").unwrap(), "/.sibyl/certs/key.pem")
     )
     .await
     .unwrap();
@@ -49,7 +49,7 @@ async fn handler(
     if tooltype == "linter".to_string() || tooltype == "formatter".to_string() {
         if let Some(field) = multipart.next_field().await.unwrap() {
             let session_id = Uuid::new_v4().to_string();
-            let workdir = format!("{}{}{}{}", std::env::var("HOME").unwrap(), "/.remotelint/workbench/", &session_id, "/");
+            let workdir = format!("{}{}{}{}", std::env::var("HOME").unwrap(), "/.sibyl/workbench/", &session_id, "/");
             match create_dir(&workdir) {
                 Err(_) => return (StatusCode::INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR\n".to_string()),
                 Ok(_) => 0,
@@ -60,7 +60,7 @@ async fn handler(
             let file = File::create(format!("{}{}", &workdir, &file_name));
             file.expect("").write_all(&bytes).unwrap();
             
-            let tools_json = File::open(format!("{}{}", std::env::var("HOME").unwrap(), "/.remotelint/tools.json")).unwrap();
+            let tools_json = File::open(format!("{}{}", std::env::var("HOME").unwrap(), "/.sibyl/tools.json")).unwrap();
             let tools_json_reader = BufReader::new(tools_json);
             let tools: Tools = serde_json::from_reader(tools_json_reader).unwrap();
 
