@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+cat /dev/stdin | jq -c '.[]' | while read e; do
+    filepath=$(echo $e | jq -r '.filepath')
+    echo $e | jq '.violations' | jq -c '.[]' | while read v; do
+        line_no=$(echo $v | jq -r .line_no)
+        line_pos=$(echo $v | jq -r .line_pos)
+        code=$(echo $v | jq -r .code)
+        description=$(echo $v | jq -r .description)
+        echo "$filepath:$line_no:$line_pos:$code: $description"
+    done
+done

@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+cat /dev/stdin | sed -z 's/\n -->/ -->/g' | grep 'error:.*-->' | sed 's/\(.*\) --> \(.*\)/\2:\1/g'

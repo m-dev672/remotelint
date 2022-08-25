@@ -11,7 +11,8 @@
         "phpcs": "phpcs --report=emacs {{ target }}",
         "flake8": "flake8 {{ target }}",
         "rubocop": "rubocop {{ target }}",
-        "clippy": "clippy-driver --edition 2021 -Cpanic=abort {{ target }} 2>&1 | sed -z 's/\\n -->/ -->/g' | grep 'error:.*-->' | sed 's/\\(.*\\) --> \\(.*\\)/\\2:\\1/g'"
+        "clippy": "clippy-driver --edition 2021 -Cpanic=abort {{ target }} 2>&1 | ~/.sibyl/bin/clippy-unix",
+        "sqlfluff": "sqlfluff lint --dialect mysql --format json {{ target }} | ~/.sibyl/bin/sqlfluff-unix"
     },
     "formatter": {
         "clang-format": "clang-format {{ target }}",
@@ -23,6 +24,7 @@
         "phpcbf": "phpcbf {{ target }}",
         "autopep8": "autopep8 --in-place --aggressive --aggressive {{ target }}",
         "rubocop": "rubocop -x {{ target }}",
-        "rustfmt": "rustfmt {{ target }}"
+        "rustfmt": "rustfmt {{ target }}",
+        "sqlfluffmysql": "sqlfluff fix --dialect mysql {{ target }}"
     }
 }
