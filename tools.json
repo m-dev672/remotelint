@@ -23,6 +23,6 @@
         "phpcbf": "phpcbf {{ target }}",
         "autopep8": "autopep8 --in-place --aggressive --aggressive {{ target }}",
         "rubocop": "rubocop -x {{ target }}",
-        "clippy": "rustfmt {{ target }}"
+        "rustfmt": "rustfmt {{ target }}"
     }
 }
