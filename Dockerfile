@@ -107,7 +107,10 @@ ENV PATH=$PATH:/root/.cargo/bin
 RUN apt install -y jq
 RUN pip install sqlfluff
 
-COPY ./scripts/* /usr/local/bin/
+COPY ./scripts/clippy-unix /usr/local/bin/clippy-unix
+COPY ./scripts/sqlfluff-unix /usr/local/bin/sqlfluff-unix
+RUN chmod +x /usr/local/bin/clippy-unix
+RUN chmod +x /usr/local/bin/sqlfluff-unix
 
 RUN mkdir /root/.sibyl/bin
 COPY --from=builder \
