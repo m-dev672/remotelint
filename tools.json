@@ -11,8 +11,8 @@
         "phpcs": "phpcs --report=emacs {{ target }}",
         "flake8": "flake8 {{ target }}",
         "rubocop": "rubocop {{ target }}",
-        "clippy": "clippy-driver --edition 2021 -Cpanic=abort {{ target }} 2>&1 | ~/.sibyl/bin/clippy-unix",
-        "sqlfluff": "sqlfluff lint --dialect mysql --format json {{ target }} | ~/.sibyl/bin/sqlfluff-unix"
+        "clippy": "clippy-driver --edition 2021 -Cpanic=abort {{ target }} 2>&1 | clippy-unix",
+        "sqlfluff": "sqlfluff lint --dialect mysql --format json {{ target }} | sqlfluff-unix"
     },
     "formatter": {
         "clang-format": "clang-format {{ target }}",

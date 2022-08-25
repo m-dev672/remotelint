@@ -107,7 +107,9 @@ ENV PATH=$PATH:/root/.cargo/bin
 RUN apt install -y jq
 RUN pip install sqlfluff
 
-COPY ./bin /root/.sibyl/bin
+COPY ./scripts/* /usr/local/bin/
+
+RUN mkdir /root/.sibyl/bin
 COPY --from=builder \
     /home/rust/target/x86_64-unknown-linux-musl/release/sibyl \
     /root/.sibyl/bin/sibyl
