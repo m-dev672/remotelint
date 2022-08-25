@@ -66,11 +66,13 @@ async fn handler(
 
             let mut output = String::from_utf8_lossy(
                 &Command::new("sh")
-                    .args(&["-c", &tools[&tooltype][&toolname].replace("{{ target }}", &format!("$'{}{}'", &workdir, &file_name.replace("'", "\'")))])
+                    .args(&["-c", &tools[&tooltype][&toolname].replace("{{ target }}", &format!("'{}{}'", &workdir, &file_name.replace("'", "'\"'\"'")))])
                     .output().expect("").stdout
-            ).to_string().replace(&format!("{}{}", &workdir, &file_name), &file_name);
+            ).to_string();
 
-            if tooltype == "formatter".to_string() {
+            if tooltype == "linter".to_string() {
+                output = output.replace(&workdir, "")
+            } else if tooltype == "formatter".to_string() {
                 let file = File::open(format!("{}{}", &workdir, &file_name));
                 output = String::new();
                 match file.expect("").read_to_string(&mut output) {
