@@ -66,7 +66,7 @@ RUN npm install --location=global eslint
 # Markdown
 ## Linter / Remark
 ## Formatter / Remark
-RUN npm install --location=global remark-cli remark-preset-lint-consistent remark-preset-lint-recommended remark-lint-list-item-indent remark-lint-emphasis-marker remark-lint-strong-marker
+RUN npm install --location=global markdownlint-cli
 
 # PHP
 ## Linter / PHP_CodeSniffer
