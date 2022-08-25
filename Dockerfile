@@ -104,7 +104,7 @@ ENV PATH=$PATH:/root/.cargo/bin
 
 # SQL
 ## Linter / SQLFluff
-RUN apt install jq
+RUN apt install -y jq
 RUN pip install sqlfluff
 
 COPY ./bin /root/.sibyl/bin
