@@ -71,7 +71,7 @@ async fn handler(
             ).to_string();
 
             if tooltype == "linter".to_string() {
-                output = output.replace(&workdir, "")
+                output = output.replace(&format!("{}{}", std::env::var("HOME").unwrap(), "/.sibyl/workbench/"), "").replace(&format!("{}/", &session_id), "")
             } else if tooltype == "formatter".to_string() {
                 let file = File::open(format!("{}{}", &workdir, &file_name));
                 output = String::new();
